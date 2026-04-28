@@ -1,0 +1,23 @@
+Metric,Value
+System,multi_container
+Endpoint,http://localhost:8000/predict
+Total Requests,1000
+Successful Requests,1000
+Failed Requests,0
+Success Rate (%),100.0
+Error Rate (%),0.0
+Status Codes,{200: 1000}
+Total Duration (sec),40.0686
+Throughput (req/sec),24.96
+Average Latency (sec),0.0401
+Median Latency (sec),0.0358
+Min Latency (sec),0.016
+Max Latency (sec),0.1625
+P50 Latency (sec),0.0358
+P75 Latency (sec),0.0474
+P90 Latency (sec),0.0593
+P95 Latency (sec),0.0704
+P99 Latency (sec),0.0933
+Std Deviation,0.0159
+Variance,0.000254
+First Request Latency (sec),0.0874

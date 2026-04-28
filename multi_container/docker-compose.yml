@@ -1,0 +1,12 @@
+services:
+  inference:
+    build: ./inference_service
+    expose:
+      - "8001"
+
+  preprocessing:
+    build: ./preprocessing_service
+    ports:
+      - "8000:8000"
+    depends_on:
+      - inference

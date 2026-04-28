@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+torch==2.2.2
+pydantic
+numpy<2

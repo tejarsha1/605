@@ -1,0 +1,23 @@
+Metric,Value
+System,monolithic
+Endpoint,http://localhost:8010/predict
+Total Requests,1000
+Successful Requests,1000
+Failed Requests,0
+Success Rate (%),100.0
+Error Rate (%),0.0
+Status Codes,{200: 1000}
+Total Duration (sec),19.0581
+Throughput (req/sec),52.47
+Average Latency (sec),0.0191
+Median Latency (sec),0.0185
+Min Latency (sec),0.0099
+Max Latency (sec),0.0663
+P50 Latency (sec),0.0185
+P75 Latency (sec),0.0205
+P90 Latency (sec),0.0228
+P95 Latency (sec),0.025
+P99 Latency (sec),0.0338
+Std Deviation,0.0041
+Variance,1.7e-05
+First Request Latency (sec),0.0663
