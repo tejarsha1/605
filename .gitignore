@@ -1,4 +1,7 @@
 __pycache__/
 *.pyc
+*.png
+*.csv
+*.pth
+data/
 .DS_Store
-latency_*.png
