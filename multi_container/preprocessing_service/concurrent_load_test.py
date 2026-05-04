@@ -4,9 +4,10 @@ import requests
 import numpy as np
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import matplotlib.pyplot as plt
-
+import json
+import os
 # ===== CONFIG =====
-SYSTEM_NAME = "multi_container_scaled"
+SYSTEM_NAME = "multi_container_concurrent"
 URL = "http://localhost:8000/predict"
 IMAGE_PATH = "../../sample.png"
 NUM_REQUESTS = 1000
@@ -128,3 +129,36 @@ if latencies:
 
 else:
     print("No successful requests.")
+
+# ===== SAVE RESULTS FOR FINAL COMPARISON GRAPH =====
+if latencies:
+    result = {
+        "system": SYSTEM_NAME,
+        "test_type": "concurrent",
+        "total_requests": NUM_REQUESTS,
+        "concurrency": CONCURRENCY,
+        "successful": success,
+        "failed": failed,
+        "success_rate": round(success_rate, 2),
+        "error_rate": round(error_rate, 2),
+        "throughput": round(throughput, 4),
+        "avg_latency": round(float(avg_latency), 4),
+        "median_latency": round(float(median_latency), 4),
+        "p95_latency": round(float(p95), 4),
+        "p99_latency": round(float(p99), 4),
+    }
+
+    results_file = "../../results.json"
+
+    if os.path.exists(results_file):
+        with open(results_file, "r") as f:
+            data = json.load(f)
+    else:
+        data = {}
+
+    data[SYSTEM_NAME] = result
+
+    with open(results_file, "w") as f:
+        json.dump(data, f, indent=4)
+
+    print(f"✔ Saved metrics to {results_file}")
