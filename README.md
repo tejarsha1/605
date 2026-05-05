@@ -42,6 +42,8 @@ Project/
     ├── docker-compose.yml
     ├── preprocessing_service/
     └── inference_service/
+        ├── load_test.py
+        └── concurrent_load_test.py
 ```
 
 ---
