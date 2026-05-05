@@ -1,42 +1,47 @@
-# CNN Deployment Evaluation: Monolithic vs Multi-Container
+# Evaluating Monolithic vs Multi-Container Deployment of Machine Learning Systems
 
 ## Overview
 
 This project compares two deployment architectures for a CNN-based image classification system:
 
-* Monolithic Deployment – All components (preprocessing and inference) run in a single container
-* Multi-Container Deployment – Preprocessing and inference are separated into independent services with scalable inference replicas
+- **Monolithic Deployment** — preprocessing and inference run in a single container.
+- **Multi-Container Deployment** — preprocessing and inference are separated into independent services, with scalable inference replicas.
 
 The goal is to evaluate how deployment architecture affects:
 
-* Latency
-* Throughput
-* Availability
-* Scalability
+- Latency
+- Throughput
+- Availability
+- Scalability
 
 ---
 
 ## Tech Stack
 
-* Python (FastAPI, NumPy)
-* PyTorch (CNN model)
-* Docker and Docker Compose
-* AWS EC2
+- Python
+- FastAPI
+- NumPy
+- PyTorch
+- Docker
+- Docker Compose
+- AWS EC2
 
 ---
 
 ## Project Structure
 
-```
+```text
 Project/
 ├── Dockerfile-Monolith
 ├── app.py
 ├── load_test.py
 ├── concurrent_load_test.py
-├── multi_container/
-│   ├── docker-compose.yml
-│   ├── preprocessing_service/
-│   └── inference_service/
+├── requirements.txt
+├── results.json
+└── multi_container/
+    ├── docker-compose.yml
+    ├── preprocessing_service/
+    └── inference_service/
 ```
 
 ---
@@ -45,11 +50,11 @@ Project/
 
 ### Prerequisites
 
-* Python 3.10 or higher
-* Docker
-* Docker Compose
+- Python 3.10 or higher
+- Docker
+- Docker Compose
 
-Install dependencies:
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -71,17 +76,17 @@ docker build -f Dockerfile-Monolith -t cnn-monolith .
 docker run -d -p 8010:8000 --name cnn-monolith-run cnn-monolith
 ```
 
-### Verify
+### Verify API
 
 Open in browser:
 
-```
+```text
 http://localhost:8010/docs
 ```
 
 ---
 
-## Run Tests
+## Test Monolithic Architecture
 
 ### Sequential Test
 
@@ -97,7 +102,7 @@ python concurrent_load_test.py
 
 ---
 
-## Stop Monolith
+## Stop Monolithic Container
 
 ```bash
 docker stop cnn-monolith-run
@@ -108,29 +113,31 @@ docker rm cnn-monolith-run
 
 ## Run Multi-Container Architecture
 
-### Navigate
+### Navigate to Multi-Container Folder
 
 ```bash
 cd multi_container
 ```
 
-### Start Services (with scaling)
+### Start Services with Scaled Inference Replicas
 
 ```bash
 docker compose up --build --scale inference=3
 ```
 
-### Verify
+### Verify API
 
-```
+Open in browser:
+
+```text
 http://localhost:8000/docs
 ```
 
 ---
 
-## Run Tests
+## Test Multi-Container Architecture
 
-Open a new terminal:
+Open a new terminal and navigate to the preprocessing service:
 
 ```bash
 cd multi_container/preprocessing_service
@@ -150,7 +157,7 @@ python concurrent_load_test.py
 
 ---
 
-## Stop Multi-Container
+## Stop Multi-Container Services
 
 ```bash
 docker compose down
@@ -162,12 +169,14 @@ docker compose down
 
 The system is evaluated using:
 
-* Average latency
-* Median latency
-* P95 and P99 latency
-* Throughput (requests per second)
-* Success rate and error rate
-* Latency distribution (Histogram and CDF)
+- Average latency
+- Median latency
+- P95 latency
+- P99 latency
+- Throughput measured in requests per second
+- Success rate
+- Error rate
+- Latency distribution using histogram and CDF plots
 
 ---
 
@@ -175,38 +184,38 @@ The system is evaluated using:
 
 ### Sequential Load
 
-* Monolithic performs better
-* Lower latency (~20 ms)
-* Higher throughput
+- Monolithic architecture performs better under sequential load.
+- It achieves lower latency, approximately 20 ms.
+- It provides higher throughput because there is no inter-service communication overhead.
 
-### Concurrent Load (50 users)
+### Concurrent Load
 
-* Multi-container performs better
-* Higher throughput
-* Lower median latency
-* Better scalability
+- Multi-container architecture performs better under concurrent load.
+- It achieves higher throughput when multiple users send requests at the same time.
+- It provides lower median latency under load.
+- It scales better because inference replicas can process requests in parallel.
 
 ---
 
 ## Conclusion
 
-Monolithic architecture performs well under low-load scenarios due to minimal overhead and simpler design.
+Monolithic architecture is efficient for low-load scenarios because it has a simpler design and minimal overhead.
 
-Multi-container architecture introduces slight overhead in simple cases but scales better under concurrent workloads, making it more suitable for production environments.
+Multi-container architecture introduces some communication overhead between services, but it scales better under concurrent workloads. This makes it more suitable for production environments where availability, scalability, and parallel request handling are important.
 
 ---
 
 ## Future Improvements
 
-* Add load balancing for inference services
-* Deploy using Kubernetes
-* Add monitoring tools such as Prometheus and Grafana
-* Optimize model inference performance
+- Add load balancing for inference services.
+- Deploy using Kubernetes.
+- Add monitoring tools such as Prometheus and Grafana.
+- Optimize model inference using batching or GPU acceleration.
 
 ---
 
 ## Contributors
 
-* Rithvik Kommareddy
-* Tejarsha Chappidi
-* Nishanth Reddy Adidela
+- Rithvik Kommareddy
+- Tejarsha Chappidi
+- Nishanth Reddy Adidela
