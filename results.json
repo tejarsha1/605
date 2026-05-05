@@ -1,0 +1,62 @@
+{
+    "monolithic_sequential": {
+        "system": "monolithic_sequential",
+        "test_type": "sequential",
+        "total_requests": 1000,
+        "concurrency": 1,
+        "successful": 1000,
+        "failed": 0,
+        "success_rate": 100.0,
+        "error_rate": 0.0,
+        "throughput": 51.8638,
+        "avg_latency": 0.0193,
+        "median_latency": 0.0185,
+        "p95_latency": 0.0263,
+        "p99_latency": 0.0403
+    },
+    "monolithic_concurrent": {
+        "system": "monolithic_concurrent",
+        "test_type": "concurrent",
+        "total_requests": 1000,
+        "concurrency": 50,
+        "successful": 1000,
+        "failed": 0,
+        "success_rate": 100.0,
+        "error_rate": 0.0,
+        "throughput": 31.5554,
+        "avg_latency": 1.5653,
+        "median_latency": 1.4086,
+        "p95_latency": 2.6643,
+        "p99_latency": 3.6408
+    },
+    "multi_container_sequential": {
+        "system": "multi_container_sequential",
+        "test_type": "sequential",
+        "total_requests": 1000,
+        "concurrency": 1,
+        "successful": 1000,
+        "failed": 0,
+        "success_rate": 100.0,
+        "error_rate": 0.0,
+        "throughput": 25.1137,
+        "avg_latency": 0.0398,
+        "median_latency": 0.035,
+        "p95_latency": 0.0756,
+        "p99_latency": 0.0938
+    },
+    "multi_container_concurrent": {
+        "system": "multi_container_concurrent",
+        "test_type": "concurrent",
+        "total_requests": 1000,
+        "concurrency": 50,
+        "successful": 1000,
+        "failed": 0,
+        "success_rate": 100.0,
+        "error_rate": 0.0,
+        "throughput": 40.9549,
+        "avg_latency": 1.2061,
+        "median_latency": 0.5451,
+        "p95_latency": 4.3863,
+        "p99_latency": 7.4297
+    }
+}
